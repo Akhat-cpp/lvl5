@@ -69,5 +69,7 @@ function calculateAge(b)
 	let today = new Date;
 	temp = +(b.slice(0, 4)*31536000000 + +b.slice(5,7)*2592000000 + +b.slice(8, 10)*86400000 + +b.slice(11, 13)*3600000 + +b.slice(14, 16)*60000 + +b.slice(17, 19)*1000 + +b.slice(20, 23));
 	temp2 = today.getFullYear()*31536000000 + (today.getMonth()+1)*2592000000 + (today.getDate()+1)*86400000 + (today.getHours()+1)*3600000 + (today.getMinutes()+1)*60000 + (today.getSeconds()+1)*1000 + today.getMilliseconds()+1;
-	return Math.trunc((temp2 - temp)/(365*24*60*60*1000));
+	difference = (temp2 - temp)/(365*24*60*60*1000);
+	(difference < 1) ? (difference = Math.trunc(difference / 0.08333333333333333) + ' month') : (difference = Math.trunc(difference));
+	return difference;
 }
