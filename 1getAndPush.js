@@ -8,5 +8,5 @@ function get(url, config)
 	//   });
 	// });
 
-	fetch(url).then(d => d.json()).then(dJson => DataTable(config, dJson));
+	fetch(url).then(res => res.ok ? res : Promise.reject(res)).then(d => d.json()).then(dJson => DataTable(config, dJson)).catch(() => alert('Error download Data'));
 }
