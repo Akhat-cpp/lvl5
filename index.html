@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="3createPlusDelAndAdd.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+	<title>Document</title>
+</head>
+<body>
+	<div id="firstTask"></div>
+
+	<script src="3getAndPush.js"></script> <!-- подключаем если данные берем с сервера -->
+	<script src="3createPlusDelAndAdd.js"></script> <!-- подключаем обязательно -->
+
+	<script>
+		const config1 = {
+		  parent: 'firstTask',
+		  columns: [
+		    {title: '№', value: 'id'},
+		    {title: 'Date Create', value: 'createdAt'},
+		    {title: 'Name', value: 'name', sortable: 'true'},
+		    {title: 'Avatar', value: 'avatar'},
+		    {title: 'Surname', value: 'surname'},
+		    {title: 'Age', value: 'birthday', type: 'number', calculateAge: 1},
+		  ],
+		  search:
+			{
+			    fields: ['name', 'surname'],
+			    filters: [
+			    	v => v.toLowerCase(),
+			    	v => toKeyboardLayout(v, 'ru', 'en'),// второе значение с какого языка, третье на какой 
+			    	v => toKeyboardLayout(v, 'en', 'ru'),
+			    ],
+			},
+		  apiUrl: 'https://5f34ff0d9124200016e1941b.mockapi.io/api/v1/customers'
+		};
+		DataTablePlusSearch(config1);
+
+		function toKeyboardLayout(text, ln, ln2)
+		{	
+			let ru = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'ъ', 'э', 'ю', 'я'];
+			let en = ['f', ',', 'd', 'u', 'l', 't', '`', ';', 'p', 'b', 'q', 'r', 'k', 'v', 'y', 'j', 'g', 'h', 'c', 'n', 'e', 'a', '[', 'w', 'x', 'i', 'o', 'x', 's', ']', `'`, '.', 'z'];
+
+			let temp = '';
+			let tempArr = text.split('');
+			let counter = 0;
+			while(counter != tempArr.length)
+			{
+				temp += translit(tempArr[counter].toLowerCase(), eval(ln), eval(ln2));
+				counter++;
+			}
+			return(temp);
+		}
+
+		function translit(letter, ln, ln2)
+		{
+			let temp = '';
+			let counter = 0;
+			while(counter != ln.length && !temp)
+			{
+				if(letter == ln[counter]) temp = ln2[counter];
+				counter++;
+			}
+			if(temp) return temp;
+			else return letter;
+		}
+	</script>
+</body>
+</html>
