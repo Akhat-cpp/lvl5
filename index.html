@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="2createPlusDel.css">
+	<title>Document</title>
+</head>
+<body>
+	<div id="firstTask"></div>
+
+	<script src="2getAndPush.js"></script> <!-- подключаем если данные берем с сервера -->
+	<script src="2createPlusDel.js"></script> <!-- подключаем обязательно -->
+
+	<script>
+		const config1 = {
+		  parent: 'firstTask',
+		  columns: [
+		    {title: '№', value: 'id'},
+		    {title: 'Date Create', value: 'createdAt'},
+		    {title: 'Name', value: 'name'},
+		    {title: 'Avatar', value: 'avatar'},
+		    {title: 'Surname', value: 'surname'},
+		    {title: 'Age', value: 'birthday', type: 'number', calculateAge: 1},
+		  ],
+		  apiUrl: 'https://5f34ff0d9124200016e1941b.mockapi.io/api/v1/customers'
+		};
+		DataTable(config1);
+	</script>
+</body>
+</html>
