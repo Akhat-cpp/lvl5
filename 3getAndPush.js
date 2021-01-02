@@ -21,3 +21,17 @@ function deleteEl(id, idDiv)
 	let config = configs[idDiv];
 	fetch(urlEl, {method: 'DELETE'}).then(res => res.ok ? res : Promise.reject(res)).then(() => {fetch(urls[idDiv]).then(res => res.ok ? res : Promise.reject(res)).then(d => d.json()).then(dJson => DataTable(config, dJson)).catch(() => alert('Error download'));}).catch(() => alert('Error delete'));
 }
+
+function save(idDiv, values)
+{
+	let counter = 1;
+	let objValues = {};
+	while(counter != configs[idDiv].columns.length)
+	{
+		objValues[configs[idDiv].columns[counter].value] = values[counter-1];
+		counter++;
+	}
+	console.log(objValues);
+	let config = configs[idDiv];
+	fetch(urls[idDiv], {method: 'POST', body: JSON.stringify(objValues), headers: {'Content-Type': 'application/json'}}).then(res => res.ok ? res : Promise.reject(res)).then(() => {fetch(urls[idDiv]).then(res => res.ok ? res : Promise.reject(res)).then(d => d.json()).then(dJson => DataTable(config, dJson)).catch(() => alert('Error download'));}).catch(() => alert('Error post'))
+}

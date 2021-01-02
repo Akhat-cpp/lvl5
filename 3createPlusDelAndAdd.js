@@ -5,7 +5,7 @@ function DataTablePlusSearch(config, data)
 {
 	let idDiv = config.parent;
 	config.parent += 'd1a3455sd65asdf665asdf776asd7676as5df'; // вообще без понятия как сделать кусок который никогда не продубирует пользователь, поэтому так, можно еще дописать пару десятков рядков))
-	(config.search) ? (z = '<input type="text" id="' + config.parent + 'Input"oninput="search(`' + config.parent + '.config`, `' + config.parent + '.data`)"><div id="' + config.parent + '"></div>') : (z = '<div id="' + config.parent + 'dasdfasdfasdfasdfasdf' + '"></div>');
+	(config.search) ? (z = '<input type="text" id="' + config.parent + 'Input"oninput="search(`' + config.parent + '.config`, `' + config.parent + '.data`)">' + createModal(config) + '<div id="' + config.parent + '"></div>') : (z = createModal(config) + '<div id="' + config.parent + '"></div>');
 	document.getElementById(idDiv).innerHTML = z;
 	DataTable(config, data);
 }
@@ -189,18 +189,15 @@ function search(configLink, dataLink)
 					x = data[counter2][fields[counter]];
 					dataAfterFilter = filters[counter3](x);
 					(textAfterFilter == dataAfterFilter) ? (temp++) : (temp = temp);
-					console.log(textAfterFilter + ' ' + dataAfterFilter)
 					counter3++;
 				}
 				counterdataResult++;
 				(temp && !dublikation(dataResult, data[counter2])) ? (dataResult[counterdataResult] = data[counter2]) : (counterdataResult--);
-				console.log(temp);
 				counter2++;
 			}
 			counter++;
 		}
 	}
-	console.log(data);
 	DataTable(config, dataResult, 1, 2);//если запустить без значений 3 и 4 то функция перезаписывает дата тэйбл, и все, он работает с пустотой
 }
 

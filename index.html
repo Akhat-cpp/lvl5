@@ -12,17 +12,18 @@
 
 	<script src="3getAndPush.js"></script> <!-- подключаем если данные берем с сервера -->
 	<script src="3createPlusDelAndAdd.js"></script> <!-- подключаем обязательно -->
+	<script src="3modal.js"></script>
 
 	<script>
 		const config1 = {
 		  parent: 'firstTask',
 		  columns: [
-		    {title: '№', value: 'id'},
+		    {title: '№', value: 'id'},//по умолчанию поле айди всегда идет первым в списке
 		    {title: 'Date Create', value: 'createdAt'},
-		    {title: 'Name', value: 'name', sortable: 'true'},
+		    {title: 'Name', value: 'name', sortable: true},
 		    {title: 'Avatar', value: 'avatar'},
 		    {title: 'Surname', value: 'surname'},
-		    {title: 'Age', value: 'birthday', type: 'number', calculateAge: 1},
+		    {title: 'Age', value: 'birthday', type: 'number', sortable: true, calculateAge: 1},
 		  ],
 		  search:
 			{
@@ -30,7 +31,7 @@
 			    filters: [
 			    	v => v.toLowerCase(),
 			    	v => toKeyboardLayout(v, 'ru', 'en'),// второе значение с какого языка, третье на какой 
-			    	v => toKeyboardLayout(v, 'en', 'ru'),
+			    	v => toKeyboardLayout(v, 'en', 'ru')
 			    ],
 			},
 		  apiUrl: 'https://5f34ff0d9124200016e1941b.mockapi.io/api/v1/customers'

@@ -19,3 +19,28 @@
 {
 	align-items: right;
 }
+
+/*for modal*/
+.unvisible
+{
+    display: none;
+}
+
+.backgroundModal
+{
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    height: 100vh;
+}
+
+.modalWindowCenter
+{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
