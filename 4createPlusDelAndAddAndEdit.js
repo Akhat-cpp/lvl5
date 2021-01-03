@@ -110,7 +110,7 @@ function createBody(data, id)
 				{
 					if(dataTable[id + '.img' + counter])
 					{
-						table += '<td><img src=">' + data[counter1][temp] + '" width="50px" height="50px"></td>';
+						table += '<td><img src="' + data[counter1][temp] + '" width="50px" height="50px"></td>';
 					}
 					else
 					{
