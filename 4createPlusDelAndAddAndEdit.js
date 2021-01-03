@@ -43,6 +43,7 @@ function createHead(config, idButton, typeSortNew)
 		temp = '<td>' + config.columns[counter].title + '</td>'; // если ифы дальше запустяться то темп перезапишется
 		dataTable[config.parent + '.nameProperties' + counter] = config.columns[counter].value;
 		dataTable[config.parent + '.calculateAge' + counter] = config.columns[counter].calculateAge;
+		dataTable[config.parent + '.img' + counter] = config.columns[counter].img;
 
 
 		if(config.columns[counter].sortable && config.columns[counter].type == 'number')
@@ -88,7 +89,7 @@ function createBody(data, id)
 		{
 			if(counter == dataTable[id + '.size'])
 			{
-				table += '<td><button onclick="deleteEl(`' + data[counter1].id + '`, `' + id + '`)">' + 'Del' +'</button><button onclick="createEditModal(`' + data[counter1].id + '`, `' + id + '`)">' + 'Edit' +'</button></td>';				
+				table += '<td><button onclick="deleteEl(`' + data[counter1].id + '`, `' + id + '`)">' + 'Del' +'</button><button onclick="createEditModal(`' + data[counter1].id + '`, `' + id + '`, ' + counter1 + ')">' + 'Edit' +'</button></td>';				
 			}
 			else
 			{
@@ -107,7 +108,14 @@ function createBody(data, id)
 				}
 				else
 				{
-					table += '<td>' + data[counter1][temp] + '</td>';
+					if(dataTable[id + '.img' + counter])
+					{
+						table += '<td><img src=">' + data[counter1][temp] + '"></td>';
+					}
+					else
+					{
+						table += '<td>' + data[counter1][temp] + '</td>';
+					}
 				}
 			}
 			counter++;
@@ -247,7 +255,7 @@ function dublikation(array, text)
 	return temp;
 }
 
-function createEditModal(idEl, idDiv)
+function createEditModal(idEl, idDiv, numberInArray)
 {
 	let counter = 1;
 	let config = dataTable[idDiv + '.config'];
@@ -255,7 +263,7 @@ function createEditModal(idEl, idDiv)
 	let temp = '<div class="backgroundModal" id="' + id1 + '1"><div class="modalWindowCenter"><i class="fas fa-times" onclick="modal(`' + id1 + '1`)"></i><div>';
 	while(counter != config.columns.length)
 	{
-		temp += '<p>' + config.columns[counter].value + '</p><input data-target="' + config.columns[counter].value + '" id="' + id1 + '1Input' + counter + '">';
+		temp += '<p>' + config.columns[counter].value + '</p><input data-target="' + config.columns[counter].value + '" value="' + dataTable[idDiv + '.data'][numberInArray][config.columns[counter].value] + '" id="' + id1 + '1Input' + counter + '">';
 		counter++;
 	}
 	temp += '</div><button onclick="modal(`' + id1 + '1`); buildArrayAndStart(`' + idEl + '`, `' + config.parent + '`)">Save</button></div></div>';
